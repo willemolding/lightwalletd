@@ -45,7 +45,7 @@ FROM golang:1.17 AS lightwalletd_base
 
 ADD . /go/src/github.com/zcash/lightwalletd
 WORKDIR /go/src/github.com/zcash/lightwalletd
-RUN make \
+RUN make build \
   && /usr/bin/install -c ./lightwalletd /usr/local/bin/ \
   && mkdir -p /var/lib/lightwalletd/db \
   && chown 2002:2002 /var/lib/lightwalletd/db

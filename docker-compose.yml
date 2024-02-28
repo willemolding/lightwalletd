@@ -24,6 +24,17 @@ services:
       options:
         loki-url: 'http://localhost:3100/api/prom/push'
 
+  envoy: # allows using grpc-web https://github.com/grpc/grpc-web 
+    image: envoyproxy/envoy:v1.22.0
+    ports:
+      - "8080:8080" # port exposted for grpc-web requests
+    volumes:
+      - ./envoy.yaml:/etc/envoy/envoy.yaml
+    logging:
+      driver: loki
+      options:
+        loki-url: 'http://localhost:3100/api/prom/push'
+
   zcashd:
     image: electriccoinco/zcashd:latest
     volumes:
